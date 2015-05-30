@@ -1,0 +1,39 @@
+<!-- Imports polymer -->
+<link rel="import" href="./polymer/polymer.html">
+
+<!-- Defines element markup -->
+<dom-module id="taigi-ruby">
+    <template>
+        <hruby class="rightangle" rightangle="rightangle">
+            <ru span$="{{ji_list.length}}" order="0" class="rightangle" annotation$="{{trs}}">
+                <template is="dom-repeat" items="{{ji_list}}">
+                    <ru zhuyin diao$="{{item.diao}}" length$="{{item.yin.length}}" form$="{{item.form}}">
+                        <rb>{{item.cjk}}</rb>
+                        <zhuyin><yin>{{item.yin}}</yin><diao>{{item.diao}}</diao></zhuyin>
+                    </ru>
+                </template>
+            </ru>
+        </hruby>
+    </template>
+</dom-module>
+<!-- Registers custom element -->
+<script>
+Polymer({
+    is: 'taigi-ruby',
+    properties: {
+        trs: String,
+        cjk: String,
+    },
+    ready: function() {
+        console.log(this)
+        this.ji_list = [{cjk:"阮", yin:"ㆣㄨㄢ", diao:"ˋ", form: 'SJY'}]
+        this.ji_list =  this.TRStoZHY(this.trs, this.cjk)
+    },
+    TRStoZHY: function(trs,cjk) {
+        return [
+            {cjk:"圖", yin:"ㄉㆦ", diao:'ˊ', form:'SY'},
+            {cjk:"書", yin:"ㄙㄨ", diao:'', form:'SY'},
+            {cjk:"館", yin:"ㄍㄨㄢ", diao:'ˋ', form:'SJY'} ]
+    }
+});
+</script>
